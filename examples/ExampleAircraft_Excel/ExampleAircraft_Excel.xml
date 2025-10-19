@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="http://jsbsim.sourceforge.net/JSBSim.xsl"?>
+<fdm_config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="ExampleAircraft" version="2.0" release="BETA" xsi:noNamespaceSchemaLocation="http://jsbsim.sourceforge.net/JSBSim.xsd">
+  <fileheader>
+    <description>200g class
+fixed-wing aircraft
+- standard configuration</description>
+  </fileheader>
+  <metrics>
+    <wingarea unit="FT2">2.15278</wingarea>
+    <wingspan unit="FT">3.28084</wingspan>
+    <chord unit="FT">0.6561680000000001</chord>
+    <ref_point>
+      <x unit="IN">5.905515</x>
+      <y unit="IN">0.0</y>
+      <z unit="IN">0.0</z>
+    </ref_point>
+    <location name="AERORP" unit="IN">
+      <x>12.1176</x>
+      <y>0</y>
+      <z>0</z>
+    </location>
+  </metrics>
+  <mass_balance>
+    <inertia>
+      <ixx unit="SLUG*FT2">0.0036878</ixx>
+      <iyy unit="SLUG*FT2">0.0059004800000000005</iyy>
+      <izz unit="SLUG*FT2">0.00885072</izz>
+    </inertia>
+    <emptywt unit="LBS">0.440924</emptywt>
+    <location name="CG">
+      <x unit="IN">5.905515</x>
+      <y unit="IN">0.0</y>
+      <z unit="IN">0.0</z>
+    </location>
+  </mass_balance>
+  <ground_reactions />
+  <propulsion>
+    <engine name="E1">
+      <file />
+      <type />
+    </engine>
+    <thruster name="Prop1" type="propeller">
+      <location unit="IN">0.0 0.0 0.0</location>
+    </thruster>
+  </propulsion>
+  <aerodynamics>
+    <!--
+  Phase 3-1 Minimal Aerodynamics Implementation
+  Linear model: LIFT, DRAG, PITCH axes only
+  Based on FMS 200g aircraft estimation
+  -->
+    <axis name="LIFT">
+      <function name="aero/force/Lift_alpha">
+        <description>Lift due to angle of attack (CL = CL0 + CLalpha * alpha)</description>
+        <product>
+          <property>aero/qbar-psf</property>
+          <property>metrics/Sw-sqft</property>
+          <sum>
+            <value>0.25</value>
+            <product>
+              <value>6</value>
+              <property>aero/alpha-rad</property>
+            </product>
+          </sum>
+        </product>
+      </function>
+    </axis>
+    <axis name="DRAG">
+      <function name="aero/force/Drag_basic">
+        <description>Total drag (CD = CD0 + K*CL²)</description>
+        <product>
+          <property>aero/qbar-psf</property>
+          <property>metrics/Sw-sqft</property>
+          <sum>
+            <value>0.028</value>
+            <product>
+              <value>0.0796</value>
+              <property>aero/cl-squared</property>
+            </product>
+          </sum>
+        </product>
+      </function>
+    </axis>
+    <axis name="PITCH">
+      <function name="aero/moment/Pitch_alpha">
+        <description>Pitching moment due to angle of attack (Cm = Cm0 + Cmalpha * alpha)</description>
+        <product>
+          <property>aero/qbar-psf</property>
+          <property>metrics/Sw-sqft</property>
+          <property>metrics/cbarw-ft</property>
+          <sum>
+            <value>0.0</value>
+            <product>
+              <value>-2.052</value>
+              <property>aero/alpha-rad</property>
+            </product>
+          </sum>
+        </product>
+      </function>
+      <function name="aero/moment/Pitch_rate">
+        <description>Pitching moment due to pitch rate (Cmq: pitch rate damping)</description>
+        <product>
+          <property>aero/qbar-psf</property>
+          <property>metrics/Sw-sqft</property>
+          <property>metrics/cbarw-ft</property>
+          <value>-12.0</value>
+          <property>aero/ci2vel</property>
+          <property>velocities/q-rad_sec</property>
+        </product>
+      </function>
+    </axis>
+  </aerodynamics>
+  <output name="dataout" type="CSV">
+    <file>rc_uav.csv</file>
+    <rate>50</rate>
+    <property>velocities/v_ind_mps</property>
+    <property>aero/alpha_deg</property>
+  </output>
+</fdm_config>

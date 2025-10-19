@@ -1,0 +1,117 @@
+# JSBSim XML Generator - Linux Configuration Example
+#
+# This is an example configuration for Linux environments
+# Copy relevant sections to your config.yaml in the project root
+
+version: "1.0"
+
+# =============================================================================
+# Linux-Specific Paths
+# =============================================================================
+paths:
+  # FlightGear typical installation paths on Linux
+  # Option 1: System-wide installation
+  flightgear_exe: "/usr/bin/fgfs"
+
+  # Option 2: Local installation (uncomment if different)
+  # flightgear_exe: "/usr/local/bin/fgfs"
+
+  # Option 3: Custom build location
+  # flightgear_exe: "/opt/FlightGear/bin/fgfs"
+
+  # JSBSim data directory (usually not needed for pip install)
+  jsbsim_data_dir: null
+
+  # Output directory
+  output_dir: "output"
+
+  # Temp directory
+  temp_dir: "temp"
+
+# =============================================================================
+# FlightGear Settings
+# =============================================================================
+flightgear:
+  host: "localhost"
+  port: 5550
+
+  startup:
+    aircraft: "c172p"
+    airport: "RJTT"
+    runway: "34R"
+    timeofday: "noon"
+    geometry: "1280x720"
+    disable_hud: false
+    disable_panel: false
+    disable_sound: false
+
+# =============================================================================
+# Linux-Specific Notes
+# =============================================================================
+# 1. To find your FlightGear installation:
+#    which fgfs
+#
+# 2. Common installation locations:
+#    - /usr/bin/fgfs (apt/yum package manager)
+#    - /usr/local/bin/fgfs (manual installation)
+#    - /opt/FlightGear/bin/fgfs (custom build)
+#
+# 3. If FlightGear is not installed:
+#    Ubuntu/Debian:
+#      sudo apt-get install flightgear
+#
+#    Fedora/RHEL:
+#      sudo yum install flightgear
+#
+# 4. Python executable:
+#    Usually auto-detected, but verify with:
+#      which python3
+#
+# 5. Permissions:
+#    Make sure your user has execute permissions on fgfs:
+#      ls -l $(which fgfs)
+#
+# 6. X11 Display:
+#    FlightGear requires X11. If running headless, consider:
+#    - Xvfb (virtual framebuffer)
+#    - VNC server
+#    Or use JSBSim without FlightGear visualization
+
+simulation:
+  dt: 0.02
+  realtime_factor: 1.0
+
+generator:
+  default_evidence_level: "L2"
+  default_aircraft_name: "MyAircraft"
+  output_intermediate_json: true
+  pretty_print_xml: true
+
+testing:
+  default_duration_s: 10.0
+  trim:
+    max_iterations: 100
+    tolerance: 0.01
+  stability:
+    max_pitch_deg: 60.0
+    max_roll_deg: 60.0
+    min_altitude_m: 100.0
+
+logging:
+  enabled: true
+  level: "INFO"
+  log_dir: "logs"
+  data_logging:
+    enabled: true
+    output_dir: "dataout"
+    format: "csv"
+
+platform:
+  os: "linux"
+  python_exe: null  # Auto-detected
+
+advanced:
+  enable_experimental: false
+  verbose: false
+  parallel_processing: false
+  max_workers: 4

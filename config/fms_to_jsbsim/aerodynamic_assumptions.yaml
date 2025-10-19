@@ -1,0 +1,39 @@
+# Aerodynamic Assumptions for Stability Derivative Calculation
+# Reference: CALCULABLE_VS_INFERENCE_ANALYSIS.md Section 4
+# Created: 2025-10-16
+# Evidence Level: L3 (Standard assumptions)
+
+# Tail efficiency factors
+tail_efficiency:
+  horizontal_eta: 0.95        # Range: 0.9-1.0
+  vertical_eta_v: 0.95        # Range: 0.9-1.0
+  uncertainty_percent: 10
+
+# Downwash gradient
+downwash:
+  deps_dalpha: 0.4            # Range: 0.3-0.5 (low-wing: 0.4-0.5, high-wing: 0.3-0.4)
+  uncertainty_percent: 30
+
+# Control surface chord ratios
+control_surfaces:
+  elevator_tau: 0.35          # Elevator chord / tail chord
+  uncertainty_percent: 25
+
+# Oswald efficiency for induced drag
+induced_drag:
+  oswald_efficiency: 0.85     # Range: 0.7-0.9
+  uncertainty_percent: 15
+
+# Unit conversions (FMS → JSBSim)
+unit_conversions:
+  m_to_ft: 3.28084
+  m2_to_ft2: 10.7639
+  kg_to_lbs: 2.20462
+  kgm2_to_slugft2: 0.737562
+  n_to_lbf: 0.224809
+
+# Control surface deflection estimates (when .par data unrealistic)
+control_estimates:
+  aileron_max_rad: 0.35       # 20° typical for RC aircraft
+  rudder_max_rad: 0.35        # 20° typical
+  elevator_min_rad: 0.087     # 5° minimum expected
