@@ -1,0 +1,105 @@
+# JSBSim XML Generator - Windows Configuration Example
+#
+# This is an example configuration for Windows environments
+# Copy relevant sections to your config.yaml in the project root
+
+version: "1.0"
+
+# =============================================================================
+# Windows-Specific Paths
+# =============================================================================
+paths:
+  # FlightGear typical installation path on Windows
+  # Option 1: Default installation path
+  flightgear_exe: "C:/Program Files/FlightGear/bin/fgfs.exe"
+
+  # Option 2: Custom installation path (uncomment if different)
+  # flightgear_exe: "D:/FlightGear/bin/fgfs.exe"
+
+  # JSBSim data directory (usually not needed for pip install)
+  jsbsim_data_dir: null
+
+  # Output directory
+  output_dir: "output"
+
+  # Temp directory
+  temp_dir: "temp"
+
+# =============================================================================
+# FlightGear Settings
+# =============================================================================
+flightgear:
+  host: "localhost"
+  port: 5550
+
+  startup:
+    aircraft: "c172p"
+    airport: "RJTT"
+    runway: "34R"
+    timeofday: "noon"
+    geometry: "1280x720"
+    disable_hud: false
+    disable_panel: false
+    disable_sound: false
+
+# =============================================================================
+# Windows-Specific Notes
+# =============================================================================
+# 1. Path separators: Use forward slashes (/) or escaped backslashes (\\)
+#    Correct: "C:/Program Files/FlightGear/bin/fgfs.exe"
+#    Also OK: "C:\\Program Files\\FlightGear\\bin\\fgfs.exe"
+#    Wrong:   "C:\Program Files\FlightGear\bin\fgfs.exe"
+#
+# 2. If FlightGear is not in Program Files, check:
+#    - C:/FlightGear/
+#    - D:/FlightGear/
+#    - Your custom installation directory
+#
+# 3. To find your FlightGear installation:
+#    Open PowerShell and run:
+#      where fgfs
+#    Or check the FlightGear shortcut properties
+#
+# 4. Python executable:
+#    Usually auto-detected, but if you have multiple Python installations:
+#      where python
+#    And set explicitly if needed
+
+simulation:
+  dt: 0.02
+  realtime_factor: 1.0
+
+generator:
+  default_evidence_level: "L2"
+  default_aircraft_name: "MyAircraft"
+  output_intermediate_json: true
+  pretty_print_xml: true
+
+testing:
+  default_duration_s: 10.0
+  trim:
+    max_iterations: 100
+    tolerance: 0.01
+  stability:
+    max_pitch_deg: 60.0
+    max_roll_deg: 60.0
+    min_altitude_m: 100.0
+
+logging:
+  enabled: true
+  level: "INFO"
+  log_dir: "logs"
+  data_logging:
+    enabled: true
+    output_dir: "dataout"
+    format: "csv"
+
+platform:
+  os: "windows"
+  python_exe: null  # Auto-detected
+
+advanced:
+  enable_experimental: false
+  verbose: false
+  parallel_processing: false
+  max_workers: 4

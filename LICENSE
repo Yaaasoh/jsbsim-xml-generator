@@ -1,0 +1,152 @@
+# License and Copyright Notice
+
+**JSBSim XML Generator Project**
+**Version**: 1.0
+**Last Updated**: 2025-10-20
+
+---
+
+## 📄 Documentation Content (記事・ガイド・ドキュメント)
+
+**Copyright © 2025 Yaaasoh. All Rights Reserved.**
+
+本プロジェクトのドキュメント・記事コンテンツ（以下のディレクトリおよびファイル）は、日本の著作権法により保護されています。
+
+### 対象範囲
+- `docs/` 配下のすべてのドキュメント
+- `README.md` およびすべての README ファイル
+- マークダウンファイル (`.md`)
+- その他のドキュメント類
+
+### 利用条件
+- ❌ **商用利用禁止** - 商業目的での利用は一切認められません
+- ❌ **無断転載禁止** - 著作者の許可なく転載することはできません
+- ❌ **改変禁止** - 内容を改変して配布することはできません
+- ℹ️ **引用** - 日本の著作権法第32条に基づく適切な引用は可能です
+
+### 連絡先
+著作権に関するお問い合わせ: https://github.com/Yaaasoh
+
+---
+
+## 💻 Source Code and Scripts (ソースコード・スクリプト)
+
+**Licensed under CC BY-NC-SA 4.0**
+(Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International)
+
+本プロジェクトのソースコード・スクリプト（以下のディレクトリおよびファイル）は、CC BY-NC-SA 4.0 ライセンスの下で提供されています。
+
+### 対象範囲
+- `scripts/` 配下のすべてのスクリプト
+- `src/` 配下のソースコード
+- `.gitignore`, `package.json` 等の設定ファイル
+- Pythonスクリプト (`.py`)
+- その他のコードファイル
+
+### 利用条件
+
+#### ✅ 許可される行為
+- **非商用利用** - 個人利用、研究、教育目的での利用
+- **改変** - コードを改変し、独自のバージョンを作成
+- **再配布** - 同一ライセンス（CC BY-NC-SA 4.0）の下での再配布
+- **クレジット表示** - 以下のクレジット表示が必要です：
+  ```
+  Original work by Yaaasoh (https://github.com/Yaaasoh/jsbsim-xml-generator)
+  Licensed under CC BY-NC-SA 4.0
+  ```
+
+#### ❌ 禁止される行為
+- **商用利用** - 営利目的での利用は一切認められません
+- **異なるライセンスでの再配布** - MIT、Apache等の他ライセンスへの変更は不可
+
+### ライセンス詳細
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+---
+
+## 🔗 Third-Party Dependencies (サードパーティ依存関係)
+
+本プロジェクトは、以下のオープンソースパッケージに依存しています。
+各パッケージは独自のライセンスの下で提供されています。
+
+### Python Dependencies
+
+#### openpyxl (MIT License)
+- Copyright (c) openpyxl developers
+- https://pypi.org/project/openpyxl/
+- **互換性**: MIT License は CC BY-NC-SA 4.0 と互換性があります
+
+#### pandas (BSD 3-Clause License)
+- Copyright (c) pandas developers
+- https://pypi.org/project/pandas/
+- **互換性**: BSD License は CC BY-NC-SA 4.0 と互換性があります
+
+#### numpy (BSD License)
+- Copyright (c) 2005-2025, NumPy Developers
+- https://pypi.org/project/numpy/
+- **互換性**: BSD License は CC BY-NC-SA 4.0 と互換性があります
+
+#### scipy (BSD License)
+- Copyright (c) 2001-2002 Enthought, Inc. 2003, SciPy Developers
+- https://pypi.org/project/scipy/
+- **互換性**: BSD License は CC BY-NC-SA 4.0 と互換性があります
+
+#### JSBSim (LGPL 2.1+)
+- Copyright (c) JSBSim Development Team
+- https://pypi.org/project/JSBSim/
+- **注意**: JSBSim は外部ライブラリとして使用されています。ユーザーは JSBSim を別途インストールし、LGPL ライセンスの条件に従う必要があります。
+- **互換性**: LGPL 2.1+ は動的リンクの場合に限り CC BY-NC-SA 4.0 と互換性があります
+
+### External Tools (含まれていない外部ツール)
+
+#### FlightGear (GPL-2.0)
+- https://www.flightgear.org/
+- **注意**: FlightGear はオプションの可視化ツールです。本プロジェクトには含まれていません。
+
+---
+
+## ⚖️ License Compatibility Summary (ライセンス互換性の概要)
+
+| 依存関係 | ライセンス | 本プロジェクトとの互換性 |
+|---------|----------|-------------------|
+| openpyxl | MIT | ✅ 完全互換 |
+| pandas | BSD 3-Clause | ✅ 完全互換 |
+| numpy | BSD | ✅ 完全互換 |
+| scipy | BSD | ✅ 完全互換 |
+| JSBSim | LGPL 2.1+ | ✅ 動的リンク時互換 |
+
+ユーザーは、インストールする依存関係のライセンスに従う責任があります。
+
+---
+
+## 📝 Important Notes (重要な注意事項)
+
+### 1. 商用利用の禁止
+本プロジェクトの**すべての要素（ドキュメント・コード）**は、商用利用が禁止されています。
+
+### 2. 二重ライセンス構造
+- **ドキュメント**: 著作権法による完全保護（All Rights Reserved）
+- **コード**: CC BY-NC-SA 4.0（商用不可、改変可、再配布可）
+
+### 3. 引用について
+ドキュメントからの引用は、日本の著作権法第32条（引用の要件）に従う限り認められます：
+- 引用の必然性があること
+- 質的・量的に主従関係が明確であること
+- 出所の明示があること
+
+### 4. ライセンス違反
+本ライセンスに違反した場合、著作権法に基づく法的措置の対象となります。
+
+---
+
+## 📞 Contact (連絡先)
+
+ライセンスに関するご質問・お問い合わせ:
+- GitHub: https://github.com/Yaaasoh
+- Issues: https://github.com/Yaaasoh/jsbsim-xml-generator/issues
+
+---
+
+**© 2025 Yaaasoh. All Rights Reserved.**
+**Code licensed under CC BY-NC-SA 4.0**
+**Documentation protected by Japanese Copyright Law**
