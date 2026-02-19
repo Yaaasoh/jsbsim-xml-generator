@@ -82,3 +82,6 @@ service_account.json
 
 # Temporary files and reports
 temp/
+
+# Claude Code local settings (personal permissions, not for git)
+.claude/settings.local.json
