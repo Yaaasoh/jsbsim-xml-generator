@@ -28,6 +28,7 @@ sys.path.insert(0, str(Path(__file__).parent / "src"))
 from parse_par_file import parse_par_file, generate_parse_report
 from calculate_derivatives import calculate_derived_parameters, load_config, generate_calculation_report
 from generate_xml import generate_jsbsim_xml, generate_generation_report
+from model_provenance import build_model_provenance, write_model_provenance
 
 
 def run_pipeline(par_file: str, output_name: str, config_file: str = "config/aerodynamic_assumptions.yaml"):
@@ -46,7 +47,7 @@ def run_pipeline(par_file: str, output_name: str, config_file: str = "config/aer
     """
 
     print("=" * 70)
-    print(f"FMS to JSBSim Conversion Pipeline")
+    print("FMS to JSBSim Conversion Pipeline")
     print(f"Input: {par_file}")
     print(f"Output: {output_name}.xml")
     print("=" * 70)
@@ -122,14 +123,29 @@ def run_pipeline(par_file: str, output_name: str, config_file: str = "config/aer
         print(f"\n[WARNING] Summary generation failed: {e}")
         # Continue despite summary failure
 
+    # Generate deterministic owner-local provenance manifest after all model artifacts exist.
+    print("\n[Provenance] Recording exact model inputs and generated artifacts...")
+    provenance_path = output_dir / "MODEL_PROVENANCE.json"
+    manifest = build_model_provenance(
+        par_file,
+        config_file,
+        str(parsed_json),
+        str(derived_json),
+        str(xml_output),
+        config,
+    )
+    write_model_provenance(manifest, str(provenance_path))
+    print(f"[OK] Provenance: {provenance_path}")
+
     print("\n" + "=" * 70)
     print("[OK] CONVERSION COMPLETE")
     print(f"Output directory: {output_dir}")
     print(f"  - {parsed_json.name}")
     print(f"  - {derived_json.name}")
     print(f"  - {xml_output.name}")
-    print(f"  - Reports: parse_report.txt, calculation_report.txt, generation_report.txt")
-    print(f"  - Summary: CONVERSION_SUMMARY.txt")
+    print(f"  - {provenance_path.name}")
+    print("  - Reports: parse_report.txt, calculation_report.txt, generation_report.txt")
+    print("  - Summary: CONVERSION_SUMMARY.txt")
     print("=" * 70)
 
 
@@ -148,14 +164,14 @@ def generate_conversion_summary(parsed_data, derived, xml_path, summary_path):
 
         f.write("CONVERSION STATISTICS\n")
         f.write("-" * 70 + "\n")
-        f.write(f"Parsed parameters:\n")
+        f.write("Parsed parameters:\n")
         f.write(f"  - Geometry: {len(parsed_data['geometry'])} parameters\n")
         f.write(f"  - Mass: {len(parsed_data['mass'])} parameters\n")
         f.write(f"  - Aerodynamics: {len(parsed_data['aerodynamics'])} parameters\n")
         f.write(f"  - Control: {len(parsed_data['control'])} parameters\n")
         f.write(f"  - Propulsion: {len(parsed_data['propulsion'])} parameters\n\n")
 
-        f.write(f"Calculated parameters:\n")
+        f.write("Calculated parameters:\n")
         f.write(f"  - Geometry calculations: {len(derived['calculated_geometry'])} parameters\n")
         f.write(f"  - Stability derivatives: {len(derived['stability_derivatives'])} parameters\n")
         f.write(f"  - Unit conversions: {len(derived['unit_conversions'])} parameters\n")
@@ -184,8 +200,8 @@ def generate_conversion_summary(parsed_data, derived, xml_path, summary_path):
         f.write("NEXT STEPS\n")
         f.write("-" * 70 + "\n")
         f.write("1. Load XML in JSBSim:\n")
-        f.write(f"   import jsbsim\n")
-        f.write(f"   fdm = jsbsim.FGFDMExec('.')\n")
+        f.write("   import jsbsim\n")
+        f.write("   fdm = jsbsim.FGFDMExec('.')\n")
         f.write(f"   fdm.load_model('{aircraft}')\n\n")
         f.write("2. Run trim search to find equilibrium state\n")
         f.write("3. Test basic flight simulation\n")
