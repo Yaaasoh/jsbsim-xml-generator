@@ -25,7 +25,7 @@ def file_identity(path: str) -> Dict[str, str]:
 
 
 def configured_assumption_snapshot(config: Dict[str, Any]) -> Dict[str, Any]:
-    """Capture the current FMS aerodynamic assumptions without asserting authority."""
+    """Capture selected current FMS aerodynamic config values without asserting authority."""
     return {
         "horizontal_eta": config["tail_efficiency"]["horizontal_eta"],
         "vertical_eta_v": config["tail_efficiency"]["vertical_eta_v"],
@@ -52,8 +52,9 @@ def build_model_provenance(
             "file": file_identity(config_file),
             "configured_values": configured_assumption_snapshot(config),
             "evidence_note": (
-                "Configured conversion assumptions; this manifest records what was used "
-                "and does not assert that the values are aircraft-specific or source-validated."
+                "Selected configured values available to the conversion are recorded for traceability. "
+                "This manifest does not assert that every recorded value affects every generated result, "
+                "or that any value is aircraft-specific or source-validated."
             ),
         },
         "pipeline_artifacts": {
